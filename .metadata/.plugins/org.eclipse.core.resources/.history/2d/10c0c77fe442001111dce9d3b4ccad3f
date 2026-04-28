@@ -1,0 +1,91 @@
+package linkedlizt;
+import java.util.*;
+class CycleList extends LinkedLst{
+	private intNode head;
+	public CycleList() {
+		head=null;
+	}
+	
+	public void insertFirst(int d) {
+		super.insertFirst(d);
+	}
+	
+	public void display() {
+		super.display();
+	}
+	public void insertLast(int d) {
+		super.insertLast(d);
+	}
+	public void insertSorted(int d) {
+		super.insertSorted(d);
+	}
+	
+	public void fromCycle(int d) {
+		intNode prev=null,psave = null,temp=head;
+		while(temp!=null) {
+			prev=temp;
+			if(temp.getData()==d)
+				psave=temp;
+			temp=temp.getNext();
+		}
+		prev.setNext(psave);
+	}
+}
+
+public class CycleRelated {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		CycleList c=new CycleList();
+		int ch,n;
+		do {
+			System.out.println("1.Insert\n2.Delete\n3.Display\n4.Form Cycle\n5.Detect Cycle\n6.De-attach cycle\n7.Exit");
+			ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				int chIns = 0;
+				do {
+					System.out.println(
+							"1.InsertFirst\n2.InsertLast\n3.InsertSorted\n4.Display\n5.Exit");
+					System.out.println("Enter your choice...");
+					chIns = sc.nextInt();
+					switch (chIns) {
+					case 1:
+						System.out.println("Enter element to insert at first :");
+						n = sc.nextInt();
+						c.insertFirst(n);
+						break;
+					case 2:
+						System.out.println("Enter element to insert At last :");
+						n = sc.nextInt();
+						c.insertLast(n);
+						break;
+					
+					case 3:
+						System.out.println("Enter element to insert :");
+						n = sc.nextInt();
+						c.insertSorted(n);
+						break;
+				
+					case 4:
+						c.display();
+						break;
+					case 5:
+						System.out.println("Stopping services of insert...");
+						break;
+					default:
+						System.out.println("Invalid choice!!");
+						break;
+					}
+				} while (chIns != 5);
+				break;
+			case 2:
+				
+				break;
+				
+			case 3:
+				
+				break;
+			}
+		}while(ch!=3);
+	}
+}

@@ -1,0 +1,56 @@
+package linkedlizt;
+
+class intDoubly{
+	private int data;
+	private intDoubly prev,next;
+	public intDoubly() {
+		data=0;
+		prev=next=null;
+	}
+	public intDoubly(int d) {
+		data=d;
+		prev=next=null;
+	}
+	public int getData() {
+		return data;
+	}
+	public void setData(int data) {
+		this.data = data;
+	}
+	public intDoubly getPrev() {
+		return prev;
+	}
+	public void setPrev(intDoubly prev) {
+		this.prev = prev;
+	}
+	public intDoubly getNext() {
+		return next;
+	}
+	public void setNext(intDoubly next) {
+		this.next = next;
+	}
+	
+}
+
+class DoublyyList{
+	private intDoubly head;
+	
+	public DoublyyList() {
+		head=null;
+	}
+	public void insertFirst(int d) {
+		intDoubly new_node=new intDoubly(d);
+		if(head==null) {
+			head=new_node;
+			return;
+		}
+		new_node.setNext(head);
+		
+	}
+}
+
+public class DoubleLinked {
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,142 @@
+package linkedlizt;
+import java.util.*;
+
+class CycleList extends LinkedLst{
+	private intNode head;
+	public CycleList() {
+		head=null;
+	}
+	
+	public void formCycle(int d) {
+		intNode prev=null,psave = null,temp=head;
+		while(temp.getNext()!=null) {
+			prev=temp;
+			if(temp.getData()==d) psave=temp;
+			
+			temp=temp.getNext();
+		}
+		prev.setNext(psave);
+	}
+	
+	public void detectCycle() {
+		intNode slow,fast,c=null;
+		slow=fast=head;
+		while(fast!=null&&fast.getNext()!=null) {
+			slow=slow.getNext();
+			fast=fast.getNext().getNext();
+			if(slow==fast)break;
+			c=slow;
+		}
+		System.out.println("Cycle detected at node whose data is: "+c);
+	}
+}
+
+
+public class CycleRelated {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		CycleList c=new CycleList();
+		int ch,n;
+		do {
+			System.out.println("1.Insert\n2.Delete\n3.Display\n4.Form Cycle\n5.Detect Cycle\n6.De-attach cycle\n7.Exit");
+			ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				int chIns = 0;
+				do {
+					System.out.println(
+							"1.InsertFirst\n2.InsertLast\n3.InsertSorted\n4.Display\n5.Exit");
+					System.out.println("Enter your choice...");
+					chIns = sc.nextInt();
+					switch (chIns) {
+					case 1:
+						System.out.println("Enter element to insert at first :");
+						n = sc.nextInt();
+						c.insertFirst(n);
+						break;
+					case 2:
+						System.out.println("Enter element to insert At last :");
+						n = sc.nextInt();
+						c.insertLast(n);
+						break;
+					
+					case 3:
+						System.out.println("Enter element to insert :");
+						n = sc.nextInt();
+						c.insertSorted(n);
+						break;
+				
+					case 4:
+						c.display();
+						break;
+					case 5:
+						System.out.println("Stopping services of insert...");
+						break;
+					default:
+						System.out.println("Invalid choice!!");
+						break;
+					}
+				} while (chIns != 5);
+				break;
+			case 2:
+				int chDel = 0, a;
+				do {
+					System.out.println(
+							"1.DeleteFirst\n2.DeleteLast\n3.DeletBYPosition\n4.Show\n5.DeleteCompeteList\n6.Exit");
+					System.out.println("Enter your choice..");
+					chDel = sc.nextInt();
+					switch (chDel) {
+
+					case 1:
+						a = c.deleteFirst();
+						System.out.println(a + " deleted!");
+						break;
+
+					case 2:
+						a = c.deleteLast();
+						System.out.println(a + " deleted!");
+						break;
+					case 3:
+						System.out.println("Enter position to delete a node: ");
+						n = sc.nextInt();
+						int b = c.delete_byPosition(n);
+					case 4:
+						c.display();
+						break;
+					case 5:
+						c.deleteList();
+						break;
+					case 6:
+						System.out.println("Stopping deleting services..");
+						break;
+					default:
+						System.out.println("Invalid choice!!!");
+						break;
+					}
+				} while (chDel != 6);
+				break;
+				
+				
+			case 3:
+				c.display();
+				break;
+			case 4:
+				System.out.println("Enter data on which you want to form cycle: ");
+				int data=sc.nextInt();
+				c.formCycle(data);
+				break;
+			case 5:
+				
+				break;
+			case 6:
+				
+				break;
+			case 7:
+				System.out.println("Exiting....");
+				break;
+			default:
+				System.out.println("Invalid choice!!");
+			}
+		}while(ch!=7);
+	}
+}
