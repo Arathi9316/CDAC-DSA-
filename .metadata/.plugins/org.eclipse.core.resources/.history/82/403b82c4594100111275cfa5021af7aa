@@ -1,0 +1,113 @@
+package linkedlizt;
+
+import java.util.Scanner;
+
+
+class intNode{
+	private int data;
+	private intNode next;
+	public intNode() {
+		data=0;
+		next=null;
+	}
+	public intNode(int d) {
+		this.data=d;
+		this.next=null;
+	}
+	public void setData(int d) {
+		this.data=d;
+	}
+	public void setNext(intNode n) {
+		this.next=n;
+	}
+	public int getData() {
+		return data;
+	}
+	public intNode getNext() {
+		return next; 
+	}
+	public String toString() {
+		return "["+data+"]->";
+	}
+	
+}
+
+class LinkedL{
+	private intNode head;
+	public LinkedL() {
+		head=null;
+	}
+	
+	public void insertFirst(int d) {
+		intNode new_node=new intNode();
+		if(head==null) {
+			head=new_node;
+			return;
+		}
+		new_node.setNext(head);
+		head=new_node;
+	}
+	public void insertLast(int d) {
+		intNode new_node=new intNode();
+		if(head==null) {
+		head=new_node;
+		return;
+		}
+		intNode itr=head;
+		while(itr.getNext()!=null) {
+			itr=itr.getNext();
+			}
+			itr.setNext(new_node);
+			return;
+	}
+	public void display() {
+		intNode itr=head;
+		while(itr!=null) {
+			itr=itr.getNext();
+			System.out.println(itr.getData());
+		}
+	}
+	
+}
+
+
+public class LinkedLists {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		LinkedL list=new LinkedL();
+		int ch,n;
+		do {
+		System.out.println("=====Queue Operations=====");
+		System.out.println("1.InsertFirst\n2.InsertLast\n3.Dsiplay\n4.Show\n5.Exit");
+		System.out.println("Enter your choice ...");
+		ch=sc.nextInt();
+		switch(ch) {
+		case 1:
+			System.out.println("Enter element to insert: ");
+			n=sc.nextInt();
+			list.insertFirst(n);
+			break;
+		case 2:
+			System.out.println("Enter element to insert: ");
+			n=sc.nextInt();
+			list.insertLast(n);
+			break;
+			
+		case 3:
+			list.display();
+			break;
+			
+		case 4:
+			
+			break;
+			
+		case 5:
+			System.out.println("Exiting....");
+			break;
+			
+		default:
+			System.out.println("Invalid choice..");
+		}
+		}while(ch!=5);
+	}
+}

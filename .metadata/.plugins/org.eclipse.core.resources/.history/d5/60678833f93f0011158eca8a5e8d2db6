@@ -1,0 +1,51 @@
+package stack;
+	
+
+public class checkBalanceSymbol {
+	public static boolean match(char a,char b) {
+		if( a=='['&&  b==']'|| a=='{' &&  b=='}'|| a=='('&&  b==')') {
+			return true;
+		}
+		else 
+			return false;
+	}
+	
+	
+	
+	public static void main(String[]args) {
+		String str="[{(12*2)+4}(2*3)]";
+		int i;
+		char ch;
+		MyStack s=new MyStack(25);
+		for(i=0;i<str.length();i++) {
+			
+			if(str.charAt(i)=='['||str.charAt(i)=='{'||str.charAt(i)=='(') {
+				
+				s.push(str.charAt(i));
+			}
+			else if(str.charAt(i)==']'||str.charAt(i)=='}'||str.charAt(i)==')') {
+				if(s.isEmpty()) {
+					System.out.println("Right are more ");
+					break;
+				}
+				else {
+					ch=s.pop();
+					if(!match(ch,str.charAt(i))) {
+						System.out.println("Not matches");
+						break;
+					}
+				}
+			}
+		}
+		if(i==str.length()) {
+			if(s.isEmpty()) {
+				System.out.println("Correct");
+			}
+			else 
+				System.out.println("Not correct.");
+		}
+		
+	}
+	
+	
+}

@@ -1,0 +1,64 @@
+package stack;
+
+class MyStack{
+	private char arr[] ;
+	private int top;
+	public MyStack() {
+		top=-1;
+		arr=new char[10];
+	}
+	public MyStack(int n) {
+		top=-1;
+		arr=new char[n];
+	}
+	public boolean isFull() {
+		if(top==arr.length-1) {
+			return true;
+		}
+		else return false;
+	}
+	public void push(char c) {
+		if(isFull()) {
+			System.out.println("Overflow!!!");
+			return;
+		}
+		else {
+			top++;
+			arr[top]=c;
+			return;
+		}
+	}
+	public boolean isEmpty() {
+		if(top==-1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public char pop() {
+		char d='*';
+		if(!(isEmpty())) {
+			d=arr[top];
+			top--;
+		}
+		return d;
+	}
+	public char peek()
+	{	
+		if(!(isEmpty())) {
+			return arr[top];
+		}
+		else return '*';
+	}
+	
+}
+
+//public class charStack {
+//	public static void main(String[] args) {
+//		MyStack s=new MyStack();
+//		System.out.println();
+//		
+//	}
+	
+}

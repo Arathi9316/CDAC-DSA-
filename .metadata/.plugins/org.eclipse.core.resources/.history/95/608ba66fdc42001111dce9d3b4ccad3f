@@ -1,0 +1,456 @@
+package linkedlizt;
+
+import java.util.Scanner;
+
+class intNode{
+	private int data;
+	private intNode next;
+	public intNode() {
+		data=0;
+		next=null;
+	}
+	public intNode(int d) {
+		data =d;
+		next=null;
+	}
+	public void setData(int d) {
+		this.data=d;
+	}
+	public void setNext(intNode n) {
+		this.next=n;
+	}
+	public int getData()
+	{	
+		return data;
+	}
+	public intNode getNext() {
+		return next;
+	}
+}
+	class LinkedLst{
+		private intNode head;
+		public LinkedLst() {
+			head=null;
+		}
+		public void insertFirst(int d) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				head=new_node;
+				return;
+			}
+			new_node.setNext(head);
+			head=new_node;
+			return;
+		}
+		
+		public void insertLast(int d) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				head=new_node;
+				return;
+			}
+			intNode itr=head;
+			while(itr.getNext()!=null) {
+				itr=itr.getNext();
+			}
+				itr.setNext(new_node);
+				return;
+			
+		}
+		public void insertByPosition(int d,int p) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				head=new_node;
+				return;
+			}
+			if(p==1) {
+				new_node.setNext(head);
+				head=new_node;
+				return;
+			}
+			intNode itr=head;
+			for(int i=1;i<p-1&&itr.getNext()!=null;i++) {
+				itr=itr.getNext();
+			}
+			new_node.setNext(itr.getNext());
+			itr.setNext(new_node);
+			return;
+				
+		}
+		
+		public void insertSorted(int d) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				head=new_node;
+				return;
+			}
+			if(d<head.getData()) {
+				new_node.setNext(head.getNext());
+				head=new_node;
+				return;
+				
+			}
+			intNode itr=head;
+			while(itr.getNext()!=null&&itr.getData()<d) {
+				itr=itr.getNext();
+				new_node.setNext(itr.getNext());
+				itr.setNext(new_node);
+				return;
+				
+			}
+		}
+		
+		public void insertBefore(int d,int key) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				head=new_node;
+				return;
+			}
+			if(head.getData()==key) {
+				new_node.setNext(head.getNext());
+				head=new_node;
+				return;
+			}
+			intNode itr=head;
+			while(itr.getNext()!=null && itr.getNext().getData()!=key)
+				itr=itr.getNext();
+			if(itr.getNext()!=null) {
+				new_node.setNext(itr.getNext());
+				itr.setNext(new_node);
+			}
+			else {
+				System.out.println("Invalid key..");
+				return;
+			}
+		}
+		
+		
+		public void insertAfter(int d,int key) {
+			intNode new_node=new intNode(d);
+			if(head==null) {
+				System.out.println("List is empty..");
+				return;
+			}
+			if(head.getData()==key) {
+				head.setNext(new_node);
+				return;
+			}
+			
+			intNode itr=head;
+			while(itr.getNext()!=null && itr.getData()!=key)
+				itr=itr.getNext();
+			if(itr.getNext()!=null) {
+				new_node.setNext(itr.getNext());
+				itr.setNext(new_node);
+			}
+			else {
+				System.out.println("Invalid key..");
+				return;
+			}
+		}
+		
+		
+		public void display() {
+			if(head==null) {
+				System.out.println("List is empty..");
+				return;
+			}
+			intNode itr=head;
+			while(itr!=null) {
+				System.out.print(itr.getData()+"->");
+				itr=itr.getNext();
+			}
+			System.out.println();
+			return;
+		}
+		
+		public int deleteFirst() {
+			if(head==null) {
+				System.out.println("List is empty!!");
+				return -999;
+			}
+			intNode deletable;
+			deletable=head;
+			int d=deletable.getData();
+			head=head.getNext();
+			deletable.setNext(null);
+			return d;
+		}
+		
+		
+		public int deleteLast() {
+			if(head==null) {
+				System.out.println("Empty list!");
+				return -999;
+			}
+			intNode itr=head;
+			int d;
+			if(head.getNext()==null) {
+				d=head.getData();
+				head=null;
+				return d;
+				
+			}
+			intNode deletable;
+			while(itr.getNext().getNext()!=null) {
+				itr=itr.getNext();
+			}
+			deletable=itr.getNext();
+			 d=deletable.getData();
+			 deletable=null;
+			 itr.setNext(null);
+			return d;
+			
+		}
+		
+		public int delete_byPosition(int pos) {
+			int d=-999;
+			if(head==null) {
+				System.out.println("Empty list!!");
+				return d;
+			}
+			if(pos==1) {
+				d=head.getData();
+				head=null;
+				return d;
+			}
+			intNode itr=head,deletable;
+			int i=1;
+			for(;i<pos-1&&itr.getNext()!=null;itr=itr.getNext(),i++);
+			deletable=itr.getNext();
+			if(itr.getNext()!=null) {
+				itr.setNext(deletable.getNext());
+				d=deletable.getData();
+				deletable.setNext(null);
+				return d;
+			}
+			else {
+				System.out.println("Position invalid!");
+				return d;
+			}
+			
+		}
+		
+		public void deleteList() {
+			if(head==null) {
+				System.out.println("List already empty!");
+			}
+			intNode itr=head;
+			while(itr.getNext()!=null) {
+				itr=itr.getNext();
+				itr.setNext(null);
+			}
+			head=null;
+		}
+		
+		public int countNodes() {
+			int count=0;
+			if(head==null) {
+				return count;
+			}
+			intNode itr=head;
+			while(itr!=null) {
+				itr=itr.getNext();
+				count++;
+			}
+			return count;
+			
+		}
+		
+		public void displayAlternateOdd() {
+			if(head==null) {
+				System.out.println("List is empty!");
+			}
+			intNode itr=head;
+			while(itr!=null) {
+				System.out.print(itr.getNext().getData()+"->");
+				if(itr.getNext()==null)break;
+				else
+				itr=itr.getNext().getNext();
+				
+			}
+			System.out.println();
+		}
+		public void displayAlternateEven() {
+			if(head==null) {
+				System.out.println("List is empty!");
+			}
+			intNode itr=head;
+			while(itr!=null) {
+				System.out.print(itr.getData()+"->");
+				if(itr.getNext()==null)break;
+				else
+				itr=itr.getNext().getNext();
+				
+			}
+			System.out.println();
+		}
+		
+		public void reverse() {
+			intNode prev,curr,next;
+			prev=null;
+			curr=head;
+			while(curr!=null) {
+				
+				next=curr.getNext();
+				curr.setNext(prev);
+				prev=curr;
+				curr=next;
+			}
+			head=prev;
+			display();
+		}
+		
+	}
+	
+
+
+public class LinkedListAllFunc {
+	public static void main(String[] args) {
+		
+		Scanner sc=new Scanner(System.in);
+		int ch,n;
+		LinkedLst ll1=new LinkedLst();
+		do {
+		System.out.println("========Queue Operations=========");
+		System.out.println("1.Insert\n2.Delete\n3.Count nodes\n4.Display\n5.Reverse\n6.Exit");
+		System.out.println("Enter your choice....");
+		ch=sc.nextInt();
+		switch(ch) {
+		case 1:
+			int chIns=0;
+			do {
+			System.out.println("1.InsertFirst\n2.InsertLast\n3.InsertByPosition\n4.InsertSorted\n5.InsertBeforeData\n6.InsertAfterData\n7.Display\n8.Exit");
+			System.out.println("Enter your choice...");
+			chIns=sc.nextInt();
+			switch(chIns) {
+			case 1:
+				System.out.println("Enter element to insert at first :");
+				n=sc.nextInt();
+				ll1.insertFirst(n);
+				break;
+			case 2:
+				System.out.println("Enter element to insert At last :");
+				n=sc.nextInt();
+				ll1.insertLast(n);
+				break;
+			case 3:
+				System.out.println("Enter \"element\" to insert and at which \"position\" :");
+				n=sc.nextInt();
+				int p=sc.nextInt();
+				ll1.insertByPosition(n, p);
+				break;
+			case 4:
+				System.out.println("Enter element to insert :");
+				n=sc.nextInt();
+				ll1.insertSorted(n);
+				break;
+			case 5:
+				System.out.println("Enter \"element\" to insert before \"data\" :");
+				n=sc.nextInt();
+				int key=sc.nextInt();
+				ll1.insertBefore(n, key);
+				break;
+			case 6:
+				System.out.println("Enter \"element\" to insert after \"data\" :");
+				n=sc.nextInt();
+				int key1=sc.nextInt();
+				ll1.insertAfter(n, key1);
+				break;
+			case 7:
+				ll1.display();
+				break;
+			case 8:
+				System.out.println("Stopping services of insert...");
+				break;
+			default:
+				System.out.println("Invalid choice!!");
+				break;
+			}
+			}while(chIns!=8);
+			break;
+			
+		case 2:
+			int chDel=0,a;
+			do {
+				System.out.println("1.DeleteFirst\n2.DeleteLast\n3.DeletBYPosition\n4.Show\n5.DeleteCompeteList\n6.Exit");
+				System.out.println("Enter your choice..");
+				chDel=sc.nextInt();
+				switch(chDel) {
+				
+				case 1:
+					a=ll1.deleteFirst();
+					System.out.println(a + " deleted!");
+					break;
+					
+				case 2:
+					a=ll1.deleteLast();
+					System.out.println(a+" deleted!");
+					break;
+				case 3:
+					System.out.println("Enter position to delete a node: ");
+					n=sc.nextInt();
+					int b=ll1.delete_byPosition(n);
+				case 4:
+					ll1.display();
+					break;
+				case 5:
+					ll1.deleteList();
+					break;
+				case 6:
+					System.out.println("Stopping deleting services..");
+					break;
+				default:
+					System.out.println("Invalid choice!!!");
+					break;
+				}
+			}while(chDel!=6);
+			break;
+			
+			
+		case 3:
+				System.out.println("Total nodes are: "+ll1.countNodes());
+				break;
+		case 4:
+			int chDis=0;
+			System.out.println("1.Display\n2.DisplayAlternateEvenPos\n3.DisplayAlternateOddPos\n4.Exit");
+			System.out.println("Enter your choice...");
+			chDis=sc.nextInt();
+			switch(chDis) {
+			case 1:
+				ll1.display();
+				break;
+			case 2:
+				ll1.displayAlternateEven();
+				break;
+			case 3:
+				ll1.displayAlternateOdd();
+				break;
+			case 4:
+				System.out.println("Exiting from displayss..");
+				break;
+			default:
+				System.out.println("Invalid choice!!!");
+				break;
+			}
+			break;
+		
+		case 5:
+			ll1.reverse();
+			
+			break;
+			
+			
+		case 6:
+			
+			System.out.println("Stopping......");
+			break;
+	
+		default:
+			System.out.println("Invalid choice!!");
+			break;
+		}
+		}while(ch!=5);
+	sc.close();	
+	}
+}
