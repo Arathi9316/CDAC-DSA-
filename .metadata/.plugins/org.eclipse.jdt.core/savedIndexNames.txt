@@ -1,5 +1,4 @@
 INDEX VERSION 1.134+D:\C- DAC\ADS\.metadata\.plugins\org.eclipse.jdt.core
-309133238.index
 1292166488.index
 1865797976.index
 3995948209.index
