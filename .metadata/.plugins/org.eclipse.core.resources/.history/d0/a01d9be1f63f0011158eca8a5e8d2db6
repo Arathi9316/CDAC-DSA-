@@ -1,7 +1,0 @@
-package stack;
-
-public class checkBalanceSymbol {
-	public static void main(String[]args) {
-		String str="[{(12*2)+4}(2*3)}";
-	}
-}
